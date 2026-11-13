@@ -2,6 +2,10 @@ name: release
 
 # 发布附件（main.js / manifest.json）需要来源证明：Obsidian 目录会检查 release 资产的
 # artifact attestation，缺失会被记为一条审核问题。
+#
+# 证明对象是「在 CI 里重新构建出来的 main.js」：tools/rebuild.js 从仓库 main.js 里反解出
+# 内联页面，再按 src/main.js 模板重建一次，重建结果必须与仓库内 main.js 逐字节相同，
+# 同时与 release 附件相同 —— 这样来源证明覆盖的是可复现的构建产物，而不是随手拷上来的文件。
 on:
   release:
     types: [published]
@@ -37,9 +41,17 @@ jobs:
           cmp dist/main.js main.js
           cmp dist/manifest.json manifest.json
 
+      - name: 在 CI 里重建（可复现）
+        run: |
+          mkdir -p build
+          node tools/rebuild.js --write build
+          cmp build/main.js main.js
+          cmp build/main.js dist/main.js
+          cmp build/manifest.json dist/manifest.json
+
       - name: 生成来源证明
         uses: actions/attest-build-provenance@v2
         with:
           subject-path: |
-            dist/main.js
-            dist/manifest.json
+            build/main.js
+            build/manifest.json

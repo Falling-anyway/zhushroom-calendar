@@ -19,3 +19,5 @@ jobs:
         run: node test/harness.js
       - name: manifest 校验
         run: node tools/check-manifest.js
+      - name: 构建可复现（模板 + 内联页面重建 main.js）
+        run: node tools/rebuild.js
