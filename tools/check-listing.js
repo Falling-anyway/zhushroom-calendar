@@ -65,7 +65,7 @@ function getOnce(url) {
           }
         );
         req.on("error", reject);
-        req.setTimeout(20000, () => req.destroy(new Error("超时")));
+        req.setTimeout(Number(process.env.ZS_HTTP_TIMEOUT || 20000), () => req.destroy(new Error("超时")));
         req.end();
       })
   );
