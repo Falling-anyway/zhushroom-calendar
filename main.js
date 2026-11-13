@@ -215,13 +215,18 @@ module.exports = class ZhushroomPlugin extends Plugin {
     await this.app.workspace.revealLeaf(leaf);
   }
 
+  /* 图标改了之后让标签页头部重画：用公开的 layout-change 事件，不碰内部方法 */
+  refreshHeaders() {
+    try {
+      this.app.workspace.trigger("layout-change");
+    } catch (e) {}
+  }
+
   refreshAllViews() {
     this.app.workspace.getLeavesOfType(VIEW_TYPE).forEach((leaf) => {
       const view = leaf.view;
       if (view && typeof view.onOpen === "function") view.onOpen();
-      try {
-        leaf.updateHeader();
-      } catch (e) {}
+      this.refreshHeaders();
     });
   }
 
@@ -267,10 +272,8 @@ module.exports = class ZhushroomPlugin extends Plugin {
     if (this.ribbonEl) setIcon(this.ribbonEl, iconId);
     this.app.workspace.getLeavesOfType(VIEW_TYPE).forEach((leaf) => {
       if (leaf.view) leaf.view.getIcon = () => iconId;
-      try {
-        leaf.updateHeader();
-      } catch (e) {}
     });
+    this.refreshHeaders();
     await this.saveSettings();
   }
 
