@@ -1,7 +1,7 @@
 {
   "id": "zhushroom-calendar",
   "name": "Zhushroom Calendar",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "minAppVersion": "1.5.0",
   "description": "Open a calendar in a tab: week, month and year views, timetable, DDL countdown, habits and mood, all saved as Markdown notes in your vault.",
   "author": "Falling-anyway",
