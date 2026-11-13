@@ -81,6 +81,25 @@ async function main() {
   console.log(`页面：${page.status}  ${page.body.includes("A new scan is in progress.") ? "扫描中" : ""}`);
   console.log(`Review：${review}`);
 
+  let api;
+  try {
+    api = await getOnce(`https://community.obsidian.md/api/v1/plugins/${ID}`);
+  } catch (e) {
+    api = null;
+  }
+  if (api && api.status === 200) {
+    try {
+      const o = JSON.parse(api.body);
+      console.log(`条目：${o.name}  下载 ${o.downloads}  安全状态 ${o.security_status}  更新 ${o.updated}`);
+      console.log(`截图：桌面 ${o.screenshots ? o.screenshots.desktop.length : 0} 张，手机 ${o.screenshots ? o.screenshots.mobile.length : 0} 张`);
+      console.log(`兼容：桌面 ${o.compat ? o.compat.desktop : "?"}，手机 ${o.compat ? o.compat.mobile : "?"}`);
+    } catch (e) {
+      console.log(`条目：解析失败（${e.message}）`);
+    }
+  } else {
+    console.log(`条目：未在目录 API 中（HTTP ${api ? api.status : "无响应"}）`);
+  }
+
   let list;
   try {
     list = await getOnce("https://raw.githubusercontent.com/obsidianmd/obsidian-releases/master/community-plugins.json");

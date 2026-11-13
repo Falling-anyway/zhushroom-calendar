@@ -1,0 +1,45 @@
+name: release
+
+# 发布附件（main.js / manifest.json）需要来源证明：Obsidian 目录会检查 release 资产的
+# artifact attestation，缺失会被记为一条审核问题。
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 要补做证明的 release tag
+        required: true
+
+permissions:
+  contents: read
+  id-token: write
+  attestations: write
+
+jobs:
+  attest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 下载该 release 的附件
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ github.event.release.tag_name || inputs.tag }}
+        run: |
+          mkdir -p dist
+          gh release download "$TAG" --repo "$GITHUB_REPOSITORY" \
+            --pattern main.js --pattern manifest.json --dir dist
+          ls -l dist
+
+      - name: 校验附件与仓库一致
+        run: |
+          cmp dist/main.js main.js
+          cmp dist/manifest.json manifest.json
+
+      - name: 生成来源证明
+        uses: actions/attest-build-provenance@v2
+        with:
+          subject-path: |
+            dist/main.js
+            dist/manifest.json
