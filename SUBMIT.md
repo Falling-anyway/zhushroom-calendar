@@ -18,14 +18,14 @@ gh release upload 1.0.0 main.js manifest.json --clobber
 
 1. 打开 https://community.obsidian.md ，用 Obsidian 账号登录
 2. 关联 GitHub 账号（只需一次）
-3. 「Submit a plugin」填仓库地址 `Falling-anyway/zhushi-ribbon`
+3. 「Submit a plugin」填仓库地址 `Falling-anyway/zhushroom-calendar`
 4. 审核通过后，Obsidian 里的「社区插件」直接搜 Zhushroom Calendar
 
 ## 提交时可能被问到的信息
 
 | 项 | 值 |
 | :--- | :--- |
-| 仓库 | `https://github.com/Falling-anyway/zhushi-ribbon` |
+| 仓库 | `https://github.com/Falling-anyway/zhushroom-calendar` |
 | id | `zhushroom-calendar` |
 | name | `Zhushroom Calendar` |
 | version | `1.0.0` |

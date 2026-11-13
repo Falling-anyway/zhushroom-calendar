@@ -2,7 +2,7 @@
 
 ## 报告问题
 
-在 https://github.com/Falling-anyway/zhushi-ribbon/issues 新建 issue，说明：
+在 https://github.com/Falling-anyway/zhushroom-calendar/issues 新建 issue，说明：
 
 - Obsidian 版本、插件版本
 - 复现步骤（打开哪个视图、点了什么）
