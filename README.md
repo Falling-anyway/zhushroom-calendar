@@ -45,6 +45,9 @@
 ```bash
 node tools/build.js <单文件页面路径>   # 把页面内联进 main.js
 node --check main.js                   # 语法检查
+node test/harness.js                   # 假 Obsidian 环境冒烟测试
+node tools/check-manifest.js           # manifest 合规自检
+node tools/check-listing.js            # 查看社区目录的审核状态与收录情况
 ```
 
 `src/main.js` 是插件源码模板，`main.js` 是构建产物（提交进仓库供 Obsidian 直接下载）。
