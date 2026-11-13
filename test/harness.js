@@ -183,7 +183,8 @@ function makeLeaf() {
 }
 
 (async () => {
-  const PluginClass = require(path.join(__dirname, "..", "main.js"));
+  const pluginPath = process.argv[2] ? path.resolve(process.argv[2]) : path.join(__dirname, "..", "main.js");
+const PluginClass = require(pluginPath);
   const plugin = new PluginClass(app, { name: "Zhushroom Calendar", id: "zhushroom-calendar" });
   await plugin.onload();
   if (app.workspace._ready) await app.workspace._ready();
