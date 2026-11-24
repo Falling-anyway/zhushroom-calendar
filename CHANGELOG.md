@@ -1,5 +1,19 @@
 # Changelog
 
+## 1.0.5
+
+- Categories are now yours to edit: rename, recolor, add or delete them by clicking a legend entry. Colors flow through event cards, the timetable and both charts.
+- Moods are editable too: rename, recolor, add or delete, with a soft palette picker; the mood grid and the 7-day trend use the same colors.
+- Habits get their own color palette in settings, and the timetable uses category colors instead of a fixed list.
+- Repeat dates: a multi-select date picker for new and existing events, kept in sync across a group.
+- Year view: evenly spaced heat scale, larger weekday labels, navigation in the top bar plus a "This year" button and image export.
+- Export the current view as an image (copied to the clipboard) from the toolbar.
+- Charts: a daily completed bar chart next to the pie, refreshed after every edit; the pie also follows custom category colors.
+- Timetable cards show the course name inline, and urgent DDLs are highlighted.
+- DDL countdown: configurable urgent threshold (Settings → Calendar), no end-cap dashes, new items appear right after saving.
+- Settings are grouped into four tabs with clearer hierarchy, a narrower dialog and three evenly sized action buttons.
+- Project tracking refreshes when you switch views or save an entry.
+- The bundled page is rebuilt from the merged full version.
 ## 1.0.4
 
 - Week view is now a time grid: an hour scale on the left, events placed at their start time, short events kept at a readable minimum height and pushed down so they never overlap, plus a "now" line in today's column that follows the clock.
